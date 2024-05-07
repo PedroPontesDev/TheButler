@@ -1,6 +1,10 @@
 package com.br.trentor.TheButler.model.entities;
 
 import java.io.Serializable;
+import java.util.Set;
+import java.util.TreeSet;
+
+import org.hibernate.cache.spi.support.AbstractReadWriteAccess.Item;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,6 +28,8 @@ public class Comanda implements Serializable {
 	
 	@OneToOne
 	private Garcom garcom;
+	
+	private Set<Item> itemComanda = new TreeSet<>(); 
 	
 	
 	
