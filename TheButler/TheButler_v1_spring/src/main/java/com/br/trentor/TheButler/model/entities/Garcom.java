@@ -3,38 +3,103 @@ package com.br.trentor.TheButler.model.entities;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_garcom")
 public class Garcom extends Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Column(name = "horas_trabalhadas_mes")
 	private LocalDateTime totalHorasTrabalhadasMes;
+
 	@Column(name = "salario_mensal")
 	private Double salario;
-	
-	@ManyToMany
-	@JoinTable(name = "tb_gorjeta_de_garçons", 
-	joinColumns = @JoinColumn(name = "gorjeta.id"), inverseJoinColumns = @JoinColumn(name = "garcom.id"))
+
+	@ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+	@JoinTable(name = "tb_gorjeta_de_garçons", joinColumns = @JoinColumn(name = "gorjeta.id"), inverseJoinColumns = @JoinColumn(name = "garcom.id"))
 	private Gorjeta gorjeta;
-	
+
+	@OneToOne(mappedBy = "garcom")
 	private Comanda comanda;
-	
-	
-	public Garcom(Long id, String userName, String password, String fullName, BigDecimal cpf) {
+
+	public Garcom(Long id, String userName, String password, String fullName, BigDecimal cpf,
+			LocalDateTime totalHorasTrabalhadasMes, Double salario, Gorjeta gorjeta, Comanda comanda) {
 		super(id, userName, password, fullName, cpf);
-		// TODO Auto-generated constructor stub
+		this.totalHorasTrabalhadasMes = totalHorasTrabalhadasMes;
+		this.salario = salario;
+		this.gorjeta = gorjeta;
+		this.comanda = comanda;
 	}
 
-	
-	
+	public LocalDateTime getTotalHorasTrabalhadasMes() {
+		return totalHorasTrabalhadasMes;
+	}
+
+	public void setTotalHorasTrabalhadasMes(LocalDateTime totalHorasTrabalhadasMes) {
+		this.totalHorasTrabalhadasMes = totalHorasTrabalhadasMes;
+	}
+
+	public Double getSalario() {
+		return salario;
+	}
+
+	public void setSalario(Double salario) {
+		this.salario = salario;
+	}
+
+	public Gorjeta getGorjeta() {
+		return gorjeta;
+	}
+
+	public void setGorjeta(Gorjeta gorjeta) {
+		this.gorjeta = gorjeta;
+	}
+
+	public Comanda getComanda() {
+		return comanda;
+	}
+
+	public void setComanda(Comanda comanda) {
+		this.comanda = comanda;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hash(comanda, gorjeta, salario, totalHorasTrabalhadasMes);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Garcom other = (Garcom) obj;
+		return Objects.equals(comanda, other.comanda) && Objects.equals(gorjeta, other.gorjeta)
+				&& Objects.equals(salario, other.salario)
+				&& Objects.equals(totalHorasTrabalhadasMes, other.totalHorasTrabalhadasMes);
+	}
+
+	@Override
+	public String toString() {
+		return "Garcom [totalHorasTrabalhadasMes=" + totalHorasTrabalhadasMes + ", salario=" + salario + ", gorjeta="
+				+ gorjeta + ", comanda=" + comanda + "]";
+	}
 
 }
