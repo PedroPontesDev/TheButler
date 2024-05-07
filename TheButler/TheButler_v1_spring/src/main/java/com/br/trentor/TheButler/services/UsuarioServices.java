@@ -4,6 +4,8 @@ import com.br.trentor.TheButler.model.dtos.UsuarioDTO;
 
 public interface UsuarioServices {
 
-	UsuarioDTO findById(Long id);
-	
+	UsuarioDTO criarNovoUsuario(UsuarioDTO novoUsuario) throws Exception;
+	UsuarioDTO buscarUsuarioPorId(Long id) throws Exception;
+	UsuarioDTO atualizarDadosUsuarioExistente(UsuarioDTO usuarioExistente) throws Exception;
+	void deletarUsuarioPorId(Long id) throws Exception;
 }
