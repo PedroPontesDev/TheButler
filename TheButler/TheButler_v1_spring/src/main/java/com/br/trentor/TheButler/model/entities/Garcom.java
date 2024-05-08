@@ -3,12 +3,16 @@ package com.br.trentor.TheButler.model.entities;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
@@ -20,26 +24,35 @@ import jakarta.persistence.Table;
 public class Garcom extends Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
 	@Column(name = "horas_trabalhadas_mes")
 	private LocalDateTime totalHorasTrabalhadasMes;
 
-	@Column(name = "salario_mensal")
-	private Double salario;
-
-	@ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "tb_gorjeta_de_garçons", joinColumns = @JoinColumn(name = "gorjeta.id"), inverseJoinColumns = @JoinColumn(name = "garcom.id"))
-	private Gorjeta gorjeta;
+	private List<Gorjeta> gorjeta = new ArrayList<>();
 
 	@OneToOne(mappedBy = "garcom")
 	private Comanda comanda;
 
+	@Column(name = "salario_mensal")
+	private Double salario;
+
 	public Garcom(Long id, String userName, String password, String fullName, BigDecimal cpf,
-			LocalDateTime totalHorasTrabalhadasMes, Double salario, Gorjeta gorjeta, Comanda comanda) {
+			LocalDateTime totalHorasTrabalhadasMes, List<Gorjeta> gorjeta, Comanda comanda, Double salario) {
 		super(id, userName, password, fullName, cpf);
+		this.id = id;
 		this.totalHorasTrabalhadasMes = totalHorasTrabalhadasMes;
-		this.salario = salario;
 		this.gorjeta = gorjeta;
 		this.comanda = comanda;
+		this.salario = salario;
+	}
+	
+	public Garcom() {
+		super();
 	}
 
 	public LocalDateTime getTotalHorasTrabalhadasMes() {
@@ -58,11 +71,19 @@ public class Garcom extends Usuario implements Serializable {
 		this.salario = salario;
 	}
 
-	public Gorjeta getGorjeta() {
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public List<Gorjeta> getGorjeta() {
 		return gorjeta;
 	}
 
-	public void setGorjeta(Gorjeta gorjeta) {
+	public void setGorjeta(List<Gorjeta> gorjeta) {
 		this.gorjeta = gorjeta;
 	}
 

@@ -27,7 +27,7 @@ public class Comanda implements Serializable {
 	private String nomeComanda;
 
 	@OneToMany
-	private Set<ItemCardapio> itemComanda = new TreeSet<>();
+	private Set<Item> itemComanda = new TreeSet<>();
 
 	@Column(name = "comanda_esta_aberta")
 	private Boolean estaEmAberta;
@@ -41,7 +41,7 @@ public class Comanda implements Serializable {
 	@OneToOne
 	private Mesa mesaDaComanda;
 
-	public Comanda(Long id, String nomeComanda, Set<ItemCardapio> itemComanda, Boolean estaEmAberta, Long valorConta,
+	public Comanda(Long id, String nomeComanda, Set<Item> itemComanda, Boolean estaEmAberta, Long valorConta,
 			Garcom garcom, Mesa mesaDaComanda) {
 		this.id = id;
 		this.nomeComanda = nomeComanda;
@@ -51,7 +51,11 @@ public class Comanda implements Serializable {
 		this.garcom = garcom;
 		this.mesaDaComanda = mesaDaComanda;
 	}
-
+	
+	public Comanda() {
+		
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -68,11 +72,11 @@ public class Comanda implements Serializable {
 		this.nomeComanda = nomeComanda;
 	}
 
-	public Set<ItemCardapio> getItemComanda() {
+	public Set<Item> getItemComanda() {
 		return itemComanda;
 	}
 
-	public void setItemComanda(Set<ItemCardapio> itemComanda) {
+	public void setItemComanda(Set<Item> itemComanda) {
 		this.itemComanda = itemComanda;
 	}
 

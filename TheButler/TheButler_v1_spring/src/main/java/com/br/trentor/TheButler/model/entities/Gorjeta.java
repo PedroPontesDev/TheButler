@@ -30,6 +30,10 @@ public class Gorjeta implements Serializable {
 		this.comissao = comissao;
 		this.foiPaga = foiPaga;
 	}
+	
+	public Gorjeta() {
+		
+	}
 
 	public Long getId() {
 		return id;

@@ -49,6 +49,10 @@ public class Mesa implements Serializable {
 		this.terminoOcupacao = terminoOcupacao;
 	}
 
+	public Mesa() {
+		
+	}
+	
 	public Long getId() {
 		return id;
 	}
