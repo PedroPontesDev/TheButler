@@ -38,4 +38,8 @@ public class UsuarioController {
 		userServices.deletarUsuarioPorId(id);
 		return ResponseEntity.noContent().build();
 	}
+	
+	//IMPLEMENTAR RESTANTE DO CRUD
+	
+	//TERA OUTRAS FUNCÇÕES? SEI LÁ
 }

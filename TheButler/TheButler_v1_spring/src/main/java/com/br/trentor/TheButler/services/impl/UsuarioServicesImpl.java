@@ -53,7 +53,7 @@ public class UsuarioServicesImpl implements UsuarioServices {
 	@Override
 	public void deletarUsuarioPorId(Long id) throws Exception {
 		var user = userRepository.findById(id);
-		if(user.isPresent()) {
+		if (user.isPresent()) {
 			Usuario usuarioDoBanco = user.get();
 			userRepository.delete(usuarioDoBanco);
 		} else {
