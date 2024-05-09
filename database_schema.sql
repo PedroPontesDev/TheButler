@@ -289,7 +289,7 @@ DROP TABLE IF EXISTS `tb_usuario`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tb_usuario` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `cpf` decimal(38,2) DEFAULT NULL,
+  `cpf` decimal(11,2) DEFAULT NULL,
   `full_name` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `username` varchar(255) DEFAULT NULL,
