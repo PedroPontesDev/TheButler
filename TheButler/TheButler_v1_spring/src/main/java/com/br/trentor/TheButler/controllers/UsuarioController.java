@@ -3,6 +3,8 @@ package com.br.trentor.TheButler.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,4 +31,11 @@ public class UsuarioController {
 		return new ResponseEntity<>(usuarioCadastrado, HttpStatus.CREATED);
 	}
 	
+	
+	@Operation(tags = "Usuarios", summary = "Deleta um usuario no banco")
+	@DeleteMapping(path = "deletar-usuario/{id}")
+	public ResponseEntity<?> deletarUsuarioPeloId(@PathVariable Long id) throws Exception {
+		userServices.deletarUsuarioPorId(id);
+		return ResponseEntity.noContent().build();
+	}
 }

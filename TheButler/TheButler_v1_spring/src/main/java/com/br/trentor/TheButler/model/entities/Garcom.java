@@ -28,6 +28,18 @@ public class Garcom extends Usuario implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@Column(name = "username", unique = true)
+	private String userName;
+
+	@Column(name = "password")
+	private String password;
+
+	@Column(name = "full_name")
+	private String fullName;
+
+	@Column(name = "cpf")
+	private BigDecimal cpf;
+
 	@Column(name = "horas_trabalhadas_mes")
 	private LocalDateTime totalHorasTrabalhadasMes;
 
@@ -49,6 +61,10 @@ public class Garcom extends Usuario implements Serializable {
 		this.gorjeta = gorjeta;
 		this.comanda = comanda;
 		this.salario = salario;
+		this.userName = userName;
+		this.password = password;
+		this.fullName = fullName;
+		this.cpf = cpf;
 	}
 	
 	public Garcom() {
@@ -93,6 +109,54 @@ public class Garcom extends Usuario implements Serializable {
 
 	public void setComanda(Comanda comanda) {
 		this.comanda = comanda;
+	}
+
+	@Override
+	public String getUserName() {
+		// TODO Auto-generated method stub
+		return super.getUserName();
+	}
+
+	@Override
+	public void setUserName(String userName) {
+		// TODO Auto-generated method stub
+		super.setUserName(userName);
+	}
+
+	@Override
+	public String getPassword() {
+		// TODO Auto-generated method stub
+		return super.getPassword();
+	}
+
+	@Override
+	public void setPassword(String password) {
+		// TODO Auto-generated method stub
+		super.setPassword(password);
+	}
+
+	@Override
+	public String getFullName() {
+		// TODO Auto-generated method stub
+		return super.getFullName();
+	}
+
+	@Override
+	public void setFullName(String fullName) {
+		// TODO Auto-generated method stub
+		super.setFullName(fullName);
+	}
+
+	@Override
+	public BigDecimal getCpf() {
+		// TODO Auto-generated method stub
+		return super.getCpf();
+	}
+
+	@Override
+	public void setCpf(BigDecimal cpf) {
+		// TODO Auto-generated method stub
+		super.setCpf(cpf);
 	}
 
 	@Override
