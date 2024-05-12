@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.br.trentor.TheButler.model.dtos.GarcomDTO;
+import com.br.trentor.TheButler.model.entities.Garcom;
 import com.br.trentor.TheButler.model.entities.Usuario;
 import com.br.trentor.TheButler.model.mapper.MyMapper;
 import com.br.trentor.TheButler.repositories.GarcomRepositories;
@@ -14,12 +15,14 @@ import com.br.trentor.TheButler.services.*;
 public class GarcomServicesImpl implements GarcomServices {
 
 	@Autowired
-	private GarcomRepositories userRepository;
+	private GarcomRepositories garcomRepository;
 
 	@Override
 	public GarcomDTO criarNovoUsuario(GarcomDTO novoUsuario) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		if(novoUsuario == null) throw new Exception("Dados de garçom inválido, tente novamente mais tarde!");
+		Garcom newGarcom = MyMapper.parseObject(novoUsuario, Garcom.class);
+		newGarcom = garcomRepository.save(newGarcom);
+		return MyMapper.parseObject(newGarcom, GarcomDTO.class);
 	}
 
 	@Override

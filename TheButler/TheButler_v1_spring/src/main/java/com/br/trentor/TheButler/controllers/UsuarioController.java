@@ -24,20 +24,29 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioServicesImpl userServices;
 	
-	@Operation(tags = "Usuarios", summary = "Cria um novo usuario no banco")
+	@Operation(tags = "Usuarios", summary = "Cria um novo usuario no banco", description = "Faz a criação de um tipo qualquer dentro do banco")
 	@PostMapping(path = "registrar-usuario")
 	public ResponseEntity<UsuarioDTO> criarUsuario(@RequestBody UsuarioDTO novoUsuario) throws Exception {
 		UsuarioDTO usuarioCadastrado = userServices.criarNovoUsuario(novoUsuario);
 		return new ResponseEntity<>(usuarioCadastrado, HttpStatus.CREATED);
 	}
 	
+	@Operation(tags = "Usuarios", summary = "Atualiza um usuario existente no banco", description = "Faz a atualização de um tipo qualquer dentro do banco")
+	@PostMapping(path = "atualizar-usuario")
+	public ResponseEntity<UsuarioDTO> atualizarUsuarioExistente(@RequestBody UsuarioDTO usuarioExistente) throws Exception {
+		var user = userServices.atualizarDadosUsuarioExistente(usuarioExistente);
+		return new ResponseEntity<>(user, HttpStatus.OK);
+		
+	}
 	
-	@Operation(tags = "Usuarios", summary = "Deleta um usuario no banco")
+	
+	@Operation(tags = "Usuarios", summary = "Deleta um usuario no banco", description = "Faz a deleção de um tipo qualquer dentro do banco")
 	@DeleteMapping(path = "deletar-usuario/{id}")
 	public ResponseEntity<?> deletarUsuarioPeloId(@PathVariable Long id) throws Exception {
 		userServices.deletarUsuarioPorId(id);
 		return ResponseEntity.noContent().build();
 	}
+	
 	
 	//IMPLEMENTAR RESTANTE DO CRUD
 	
