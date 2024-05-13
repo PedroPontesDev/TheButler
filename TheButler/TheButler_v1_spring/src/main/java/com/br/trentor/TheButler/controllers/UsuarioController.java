@@ -6,8 +6,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.br.trentor.TheButler.model.dtos.UsuarioDTO;
@@ -24,6 +26,11 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioServicesImpl userServices;
 	
+	public ResponseEntity<UsuarioDTO> obterUsuarioPorId(@PathVariable Long id) throws Exception {
+		UsuarioDTO user = userServices.buscarUsuarioPorId(id);
+		return new ResponseEntity<>(user, HttpStatus.OK);
+	}
+	
 	@Operation(tags = "Usuarios", summary = "Cria um novo usuario no banco", description = "Faz a criação de um tipo qualquer dentro do banco")
 	@PostMapping(path = "registrar-usuario")
 	public ResponseEntity<UsuarioDTO> criarUsuario(@RequestBody UsuarioDTO novoUsuario) throws Exception {
@@ -32,7 +39,7 @@ public class UsuarioController {
 	}
 	
 	@Operation(tags = "Usuarios", summary = "Atualiza um usuario existente no banco", description = "Faz a atualização de um tipo qualquer dentro do banco")
-	@PostMapping(path = "atualizar-usuario")
+	@PutMapping(path = "atualizar-usuario")
 	public ResponseEntity<UsuarioDTO> atualizarUsuarioExistente(@RequestBody UsuarioDTO usuarioExistente) throws Exception {
 		var user = userServices.atualizarDadosUsuarioExistente(usuarioExistente);
 		return new ResponseEntity<>(user, HttpStatus.OK);
@@ -48,7 +55,13 @@ public class UsuarioController {
 	}
 	
 	
+	public ResponseEntity<?> definirTipoDeUsuario(@RequestParam(value = "userName") String userName) throws Exception {
+			var difined = userServices.definirTipoDeUsuario(userName);
+			return null;
+	}
+	
+	
 	//IMPLEMENTAR RESTANTE DO CRUD
 	
-	//TERA OUTRAS FUNCÇÕES? SEI LÁ
+	//TERA OUTRAS FUNCÇÕES E SERA IMPLEMENTADO SPRING SECURITY POIS É UMA CLASSE QUE MEXE DIRETO NOS USUARIOS DO BANCO
 }

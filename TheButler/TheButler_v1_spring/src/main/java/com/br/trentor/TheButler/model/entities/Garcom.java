@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -33,6 +35,7 @@ public class Garcom extends Usuario implements Serializable {
 	@Column(name = "horas_trabalhadas_mes")
 	private LocalDateTime totalHorasTrabalhadasMes;
 
+	@JsonIgnore
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "tb_gorjeta_de_garçons", joinColumns = @JoinColumn(name = "gorjeta.id"), inverseJoinColumns = @JoinColumn(name = "garcom.id"))
 	private List<Gorjeta> gorjeta = new ArrayList<>();

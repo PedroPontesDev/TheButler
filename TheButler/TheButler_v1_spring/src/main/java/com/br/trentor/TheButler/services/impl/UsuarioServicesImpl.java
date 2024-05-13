@@ -59,7 +59,16 @@ public class UsuarioServicesImpl implements UsuarioServices {
 		} else {
 			throw new Exception("Usuário não encontrado, verifique o código identificador e tente novamente!");
 		}
-
+	}
+	
+	public Object definirTipoDeUsuario(String userName) throws Exception {
+		Object finded = userRepository.findByUserName(userName);
+		if(finded == null) throw new Exception("Usuário não encontrado, verifique o username e tente novamente!");
+		var aDefenir = MyMapper.parseObject(finded.getClass(), null);
+		
+		//Deixar o adm escolher que tipo de user defininr
+		//A implementar
+		return null;
 	}
 
 }
