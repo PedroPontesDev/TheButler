@@ -36,10 +36,8 @@ public class Garcom extends Usuario implements Serializable {
 	@Column(name = "salario_mensal")
 	private Double salario;
 
-	public Garcom(Long id, String userName, String password, String fullName, BigDecimal cpf,
-			LocalDateTime totalHorasTrabalhadasMes, List<Gorjeta> gorjetas, Comanda comanda, Double salario) {
+	public Garcom(Long id, String userName, String password, String fullName, BigDecimal cpf, List<Gorjeta> gorjetas, Comanda comanda, Double salario) {
 		super(id, userName, password, fullName, cpf);
-		this.totalHorasTrabalhadasMes = totalHorasTrabalhadasMes;
 		this.gorjetas = gorjetas;
 		this.comanda = comanda;
 		this.salario = salario;
@@ -47,14 +45,6 @@ public class Garcom extends Usuario implements Serializable {
 
 	public Garcom() {
 		super();
-	}
-
-	public LocalDateTime getTotalHorasTrabalhadasMes() {
-		return totalHorasTrabalhadasMes;
-	}
-
-	public void setTotalHorasTrabalhadasMes(LocalDateTime totalHorasTrabalhadasMes) {
-		this.totalHorasTrabalhadasMes = totalHorasTrabalhadasMes;
 	}
 
 	public Double getSalario() {
@@ -85,7 +75,7 @@ public class Garcom extends Usuario implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + Objects.hash(comanda, gorjetas, salario, totalHorasTrabalhadasMes);
+		result = prime * result + Objects.hash(comanda, gorjetas, salario);
 		return result;
 	}
 
@@ -99,14 +89,14 @@ public class Garcom extends Usuario implements Serializable {
 			return false;
 		Garcom other = (Garcom) obj;
 		return Objects.equals(comanda, other.comanda) && Objects.equals(gorjetas, other.gorjetas)
-				&& Objects.equals(salario, other.salario)
-				&& Objects.equals(totalHorasTrabalhadasMes, other.totalHorasTrabalhadasMes);
+				&& Objects.equals(salario, other.salario);
 	}
 
 	@Override
 	public String toString() {
-		return "Garcom [totalHorasTrabalhadasMes=" + totalHorasTrabalhadasMes + ", gorjetas=" + gorjetas + ", comanda="
-				+ comanda + ", salario=" + salario + "]";
+		return "Garcom [gorjetas=" + gorjetas + ", comanda=" + comanda + ", salario=" + salario + "]";
 	}
+
+	
 
 }

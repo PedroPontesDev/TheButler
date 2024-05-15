@@ -122,12 +122,13 @@ public class GarcomDTO extends UsuarioDTO {
 		this.salario = salario;
 	}
 
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result
-				+ Objects.hash(comanda, cpf, fullName, gorjeta, password, salario, totalHorasTrabalhadasMes, userName);
+		result = prime * result + Objects.hash(comanda, cpf, fullName, gorjeta, password, salario, userName);
 		return result;
 	}
 
@@ -143,15 +144,14 @@ public class GarcomDTO extends UsuarioDTO {
 		return Objects.equals(comanda, other.comanda) && Objects.equals(cpf, other.cpf)
 				&& Objects.equals(fullName, other.fullName) && Objects.equals(gorjeta, other.gorjeta)
 				&& Objects.equals(password, other.password) && Objects.equals(salario, other.salario)
-				&& Objects.equals(totalHorasTrabalhadasMes, other.totalHorasTrabalhadasMes)
 				&& Objects.equals(userName, other.userName);
 	}
 
 	@Override
 	public String toString() {
 		return "GarcomDTO [userName=" + userName + ", password=" + password + ", fullName=" + fullName + ", cpf=" + cpf
-				+ ", totalHorasTrabalhadasMes=" + totalHorasTrabalhadasMes + ", gorjeta=" + gorjeta + ", comanda="
-				+ comanda + ", salario=" + salario + "]";
+				+ ", gorjeta=" + gorjeta + ", comanda=" + comanda + ", salario=" + salario + "]";
 	}
 
+	
 }
