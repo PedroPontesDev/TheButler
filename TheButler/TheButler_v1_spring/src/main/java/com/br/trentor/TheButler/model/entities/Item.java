@@ -3,6 +3,8 @@ package com.br.trentor.TheButler.model.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -34,11 +36,16 @@ public class Item implements Serializable {
 
 	@Column(name = "esta_disponivel")
 	private Boolean estaDisponivel;
-	
+
 	@ManyToOne
 	private Cardapio itemDeCardapio;
 
-	public Item(Long id, String imgUrl, String nomeDoItem, Double preço, Integer quantidade, Boolean estaDisponivel, Cardapio itemDeCardapio) {
+	@JsonIgnore
+	@ManyToOne
+	private Comanda comandaDoItem;
+
+	public Item(Long id, String imgUrl, String nomeDoItem, Double preço, Integer quantidade, Boolean estaDisponivel,
+			Cardapio itemDeCardapio, Comanda comandaDoItem) {
 		this.id = id;
 		this.imgUrl = imgUrl;
 		this.nomeDoItem = nomeDoItem;
@@ -46,6 +53,7 @@ public class Item implements Serializable {
 		this.quantidade = quantidade;
 		this.estaDisponivel = estaDisponivel;
 		this.itemDeCardapio = itemDeCardapio;
+		this.comandaDoItem = comandaDoItem;
 	}
 
 	public Item() {

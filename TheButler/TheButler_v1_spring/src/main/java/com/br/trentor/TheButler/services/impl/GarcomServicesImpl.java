@@ -22,11 +22,12 @@ public class GarcomServicesImpl implements GarcomServices {
 
 	@Autowired
 	private UsuarioRepositories userRepository;
-	
+
 	@Override
 	@Transactional
 	public GarcomDTO registrarNovoGarcom(GarcomDTO novoUsuario) throws Exception {
-		if(novoUsuario == null) throw new Exception("Dados de garçom inválido, tente novamente mais tarde!");
+		if (novoUsuario == null)
+			throw new Exception("Dados de garçom inválido, tente novamente mais tarde!");
 		GarcomDTO novoGarcom = novoUsuario;
 		Garcom garcom = MyMapper.parseObject(novoGarcom, Garcom.class);
 		garcom.setUserName(novoUsuario.getUserName());
@@ -42,22 +43,39 @@ public class GarcomServicesImpl implements GarcomServices {
 
 	@Override
 	public GarcomDTO buscarGarcomPorId(Long id) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		var finder = garcomRepository.findById(id);
+		if (!finder.isPresent())
+			throw new Exception("Garcom não encontrado, verifique o identificador unico e tente novamente!");
+		Garcom garcom = finder.get();
+		var dto = MyMapper.parseObject(garcom, GarcomDTO.class);
+		return dto;
 	}
 
 	@Override
 	public GarcomDTO atualizarDadosGarcomExistente(GarcomDTO garcomExistente) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		var finder = garcomRepository.findById(garcomExistente.getId());
+		if (!finder.isPresent())
+			throw new Exception("Garcom não encontrado, verifique o identificador único e tente novamente!");
+		Garcom garcom = finder.get();
+		garcom.setUserName(garcomExistente.getUserName());
+		garcom.setPassword(garcomExistente.getPassword());
+		garcom.setFullName(garcomExistente.getFullName());
+		garcom.setCpf(garcomExistente.getCpf());
+		garcom.setComanda(garcomExistente.getComanda());
+		garcom.setTotalHorasTrabalhadasMes(garcomExistente.getTotalHorasTrabalhadasMes());
+		garcom.setSalario(garcomExistente.getSalario());
+		garcom.setGorjetas(new ArrayList<>());
+		garcomRepository.save(garcom);
+		var dto = MyMapper.parseObject(garcom, GarcomDTO.class);
+		return dto;
+
 	}
 
 	@Override
 	public void deletarGarcomPorId(Long id) throws Exception {
-		// TODO Auto-generated method stub
-		
+		var finder = garcomRepository.findById(id);
+		if (finder.isPresent()) garcomRepository.deleteById(id);
+		throw new Exception("Garcom não encontrado, verifique o identificador único e tente novamente!");
 	}
-
-	
 
 }

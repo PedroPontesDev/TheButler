@@ -48,6 +48,8 @@ public class GarcomController {
 		garcomServices.deletarGarcomPorId(id);
 		return ResponseEntity.noContent().build();
 	}
+	
+	
 
 	// TERA OUTRAS FUNCÇÕES E SERA IMPLEMENTADO SPRING SECURITY POIS É UMA CLASSE
 	// QUE MEXE DIRETO NOS Garçom DO BANCO

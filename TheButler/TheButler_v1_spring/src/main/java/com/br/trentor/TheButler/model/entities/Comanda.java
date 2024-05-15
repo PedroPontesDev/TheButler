@@ -7,6 +7,7 @@ import java.util.TreeSet;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -26,7 +27,7 @@ public class Comanda implements Serializable {
 	@Column(name = "nome_da_comanda")
 	private String nomeComanda;
 
-	@OneToMany
+	@OneToMany(mappedBy = "comandaDoItem", fetch = FetchType.EAGER)
 	private Set<Item> itemComanda = new TreeSet<>();
 
 	@Column(name = "comanda_esta_aberta")
