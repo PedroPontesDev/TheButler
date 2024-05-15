@@ -4,12 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.br.trentor.TheButler.model.dtos.GarcomDTO;
-import com.br.trentor.TheButler.model.entities.Garcom;
-import com.br.trentor.TheButler.model.entities.Usuario;
+import com.br.trentor.TheButler.model.dtos.UsuarioDTO;
 import com.br.trentor.TheButler.model.mapper.MyMapper;
 import com.br.trentor.TheButler.repositories.GarcomRepositories;
-import com.br.trentor.TheButler.services.UsuarioServices;
-import com.br.trentor.TheButler.services.*;
+import com.br.trentor.TheButler.repositories.UsuarioRepositories;
+import com.br.trentor.TheButler.services.GarcomServices;
 
 @Service
 public class GarcomServicesImpl implements GarcomServices {
@@ -17,12 +16,29 @@ public class GarcomServicesImpl implements GarcomServices {
 	@Autowired
 	private GarcomRepositories garcomRepository;
 
+	@Autowired
+	private UsuarioRepositories userRepository;
+	
+	@Autowired
+	private UsuarioServicesImpl userServices;
+	
 	@Override
-	public GarcomDTO criarNovoUsuario(GarcomDTO novoUsuario) throws Exception {
+	public GarcomDTO criarNovoGarcom(GarcomDTO novoUsuario) throws Exception {
 		if(novoUsuario == null) throw new Exception("Dados de garçom inválido, tente novamente mais tarde!");
-		Garcom newGarcom = MyMapper.parseObject(novoUsuario, Garcom.class);
-		newGarcom = garcomRepository.save(newGarcom);
-		return MyMapper.parseObject(newGarcom, GarcomDTO.class);
+		//Mapear 
+		UsuarioDTO copyValues = new UsuarioDTO();
+		copyValues.setFullName(novoUsuario.getFullName());
+		copyValues.setCpf(novoUsuario.getCpf());
+		copyValues.setUserName(novoUsuario.getUserName());
+		copyValues.setPassword(novoUsuario.getPassword());
+		userServices.criarNovoUsuario(novoUsuario);
+//
+		GarcomDTO novoGarcom = novoUsuario;
+		
+		
+		
+		
+		
 	}
 
 	@Override

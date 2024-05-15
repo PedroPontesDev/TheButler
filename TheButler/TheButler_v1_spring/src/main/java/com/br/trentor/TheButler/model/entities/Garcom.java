@@ -12,9 +12,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
@@ -24,21 +21,17 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_garcom")
-@PrimaryKeyJoinColumn(referencedColumnName = "id")
+@PrimaryKeyJoinColumn(name = "id")
 public class Garcom extends Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
 	@Column(name = "horas_trabalhadas_mes")
 	private LocalDateTime totalHorasTrabalhadasMes;
 
 	@JsonIgnore
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "tb_gorjeta_de_garçons", joinColumns = @JoinColumn(name = "gorjeta.id"), inverseJoinColumns = @JoinColumn(name = "garcom.id"))
-	private List<Gorjeta> gorjeta = new ArrayList<>();
+	@JoinTable(name = "tb_gorjeta_de_garcons", joinColumns = @JoinColumn(name = "garcom_id"), inverseJoinColumns = @JoinColumn(name = "gorjeta_id"))
+	private List<Gorjeta> gorjetas = new ArrayList<>();
 
 	@OneToOne(mappedBy = "garcom")
 	private Comanda comanda;
@@ -47,14 +40,14 @@ public class Garcom extends Usuario implements Serializable {
 	private Double salario;
 
 	public Garcom(Long id, String userName, String password, String fullName, BigDecimal cpf,
-			LocalDateTime totalHorasTrabalhadasMes, List<Gorjeta> gorjeta, Comanda comanda, Double salario) {
+			LocalDateTime totalHorasTrabalhadasMes, List<Gorjeta> gorjetas, Comanda comanda, Double salario) {
 		super(id, userName, password, fullName, cpf);
-		this.id = id;
 		this.totalHorasTrabalhadasMes = totalHorasTrabalhadasMes;
-		this.gorjeta = gorjeta;
+		this.gorjetas = gorjetas;
 		this.comanda = comanda;
+		this.salario = salario;
 	}
-	
+
 	public Garcom() {
 		super();
 	}
@@ -75,20 +68,12 @@ public class Garcom extends Usuario implements Serializable {
 		this.salario = salario;
 	}
 
-	public Long getId() {
-		return id;
+	public List<Gorjeta> getGorjetas() {
+		return gorjetas;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public List<Gorjeta> getGorjeta() {
-		return gorjeta;
-	}
-
-	public void setGorjeta(List<Gorjeta> gorjeta) {
-		this.gorjeta = gorjeta;
+	public void setGorjetas(List<Gorjeta> gorjetas) {
+		this.gorjetas = gorjetas;
 	}
 
 	public Comanda getComanda() {
@@ -98,13 +83,12 @@ public class Garcom extends Usuario implements Serializable {
 	public void setComanda(Comanda comanda) {
 		this.comanda = comanda;
 	}
-	
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + Objects.hash(comanda, gorjeta, salario, totalHorasTrabalhadasMes);
+		result = prime * result + Objects.hash(comanda, gorjetas, salario, totalHorasTrabalhadasMes);
 		return result;
 	}
 
@@ -117,15 +101,15 @@ public class Garcom extends Usuario implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Garcom other = (Garcom) obj;
-		return Objects.equals(comanda, other.comanda) && Objects.equals(gorjeta, other.gorjeta)
+		return Objects.equals(comanda, other.comanda) && Objects.equals(gorjetas, other.gorjetas)
 				&& Objects.equals(salario, other.salario)
 				&& Objects.equals(totalHorasTrabalhadasMes, other.totalHorasTrabalhadasMes);
 	}
 
 	@Override
 	public String toString() {
-		return "Garcom [totalHorasTrabalhadasMes=" + totalHorasTrabalhadasMes + ", salario=" + salario + ", gorjeta="
-				+ gorjeta + ", comanda=" + comanda + "]";
+		return "Garcom [totalHorasTrabalhadasMes=" + totalHorasTrabalhadasMes + ", gorjetas=" + gorjetas + ", comanda="
+				+ comanda + ", salario=" + salario + "]";
 	}
 
 }

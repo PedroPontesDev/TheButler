@@ -12,16 +12,16 @@ public class UsuarioDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
-	
+
 	@JsonProperty("usuario")
 	private String userName;
-	
+
 	@JsonProperty("senha")
 	private String password;
-	
+
 	@JsonProperty("NomeCompleto")
 	private String fullName;
-	
+
 	private BigDecimal cpf;
 
 	public UsuarioDTO(Long id, String userName, String password, String fullName, BigDecimal cpf) {
@@ -33,9 +33,9 @@ public class UsuarioDTO implements Serializable {
 	}
 
 	public UsuarioDTO() {
-		
+
 	}
-	
+
 	public Long getId() {
 		return id;
 	}

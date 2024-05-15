@@ -1,0 +1,45 @@
+SRPING HIBERNATE JEITO DE CRIAR AS TABELAS MAPEADAS PELO JPA: 
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+[32m :: Spring Boot :: [39m              [2m (v3.2.5)[0;39m
+
+Hibernate: create table tb_comanda (id bigint not null auto_increment, comanda_esta_aberta bit, nome_da_comanda varchar(255), valor_total_comanda bigint, garcom_id bigint, mesa_da_comanda_id bigint, primary key (id)) engine=InnoDB
+Hibernate: create table tb_comanda_item_comanda (comanda_id bigint not null, item_comanda_id bigint not null, primary key (comanda_id, item_comanda_id)) engine=InnoDB
+Hibernate: create table tb_garcom (salario_mensal float(53), horas_trabalhadas_mes datetime(6), id bigint not null, primary key (id)) engine=InnoDB
+Hibernate: create table tb_gorjeta (id bigint not null auto_increment, comissao_garcom float(53), foi_paga bit, primary key (id)) engine=InnoDB
+Hibernate: create table tb_gorjeta_de_garcons (garcom_id bigint not null, gorjeta_id bigint not null) engine=InnoDB
+Hibernate: create table tb_item (id bigint not null auto_increment, esta_disponivel bit, img_url varchar(255), nome varchar(255), preço_item float(53), quantidades integer, item_de_cardapio_id bigint, primary key (id)) engine=InnoDB
+Hibernate: create table tb_menu (id bigint not null, nome_de_cardapio varchar(255), primary key (id)) engine=InnoDB
+Hibernate: create table tb_menu_seq (next_val bigint) engine=InnoDB
+Hibernate: insert into tb_menu_seq values ( 1 )
+Hibernate: create table tb_mesa (id bigint not null auto_increment, inicio_ocupacao datetime(6), numero_ocupantes varbinary(255), status_de_mesa enum ('LIVRE','OCUPADA','RESERVADA','OCUPAR','RESERVAR','MESA_LIVRE'), termino_ocupacao datetime(6), primary key (id)) engine=InnoDB
+Hibernate: create table tb_usuario (id bigint not null auto_increment, cpf decimal(38,2), full_name varchar(255), password varchar(255), username varchar(255), primary key (id)) engine=InnoDB
+Hibernate: alter table tb_comanda drop index UK_3r1ilx4b0hjkxsuf3wv8y29vs
+Hibernate: alter table tb_comanda add constraint UK_3r1ilx4b0hjkxsuf3wv8y29vs unique (garcom_id)
+Hibernate: alter table tb_comanda drop index UK_ohnm1ufl125v96ckq5qpf672h
+Hibernate: alter table tb_comanda add constraint UK_ohnm1ufl125v96ckq5qpf672h unique (mesa_da_comanda_id)
+Hibernate: alter table tb_comanda_item_comanda drop index UK_laen5du3athu6pncpms61t423
+Hibernate: alter table tb_comanda_item_comanda add constraint UK_laen5du3athu6pncpms61t423 unique (item_comanda_id)
+Hibernate: alter table tb_usuario drop index UK_plh3sd5xqp709wamcutkiq85m
+Hibernate: alter table tb_usuario add constraint UK_plh3sd5xqp709wamcutkiq85m unique (username)
+Hibernate: alter table tb_comanda add constraint FK9ee3v5nqogrno2o2mip11i4ug foreign key (garcom_id) references tb_garcom (id)
+Hibernate: alter table tb_comanda add constraint FKbsx5nq0bmr29v0tkyo129hv18 foreign key (mesa_da_comanda_id) references tb_mesa (id)
+Hibernate: alter table tb_comanda_item_comanda add constraint FK6dridpdne8ahy44edb9wj0x26 foreign key (item_comanda_id) references tb_item (id)
+Hibernate: alter table tb_comanda_item_comanda add constraint FK1qqroodidm7visjv3h27hyaqs foreign key (comanda_id) references tb_comanda (id)
+Hibernate: alter table tb_garcom add constraint FK91iyecirjyrr4pvkimnhkhhq7 foreign key (id) references tb_usuario (id)
+Hibernate: alter table tb_gorjeta_de_garcons add constraint FK8u9341uoh75w1ytldstrhevuh foreign key (gorjeta_id) references tb_gorjeta (id)
+Hibernate: alter table tb_gorjeta_de_garcons add constraint FKfpbbk58cgpy71gmewjxee1r60 foreign key (garcom_id) references tb_garcom (id)
+Hibernate: alter table tb_item add constraint FK5fe1p3qi0cv4546tfdd1c4ghw foreign key (item_de_cardapio_id) references tb_menu (id)
+
+
+ [2m[0;39m[36mo.s.web.servlet.DispatcherServlet       [0;39m [2m:[0;39m Completed initialization in 16 ms
+Hibernate: insert into tb_usuario (cpf,full_name,password,username) values (?,?,?,?)
+Hibernate: insert into tb_usuario (cpf,full_name,password,username) values (?,?,?,?)
+Hibernate: insert into tb_usuario (cpf,full_name,password,username) values (?,?,?,?)
+Hibernate: insert into tb_usuario (cpf,full_name,password,username) values (?,?,?,?)
+[2m2024-05-15T00:53:30.818-03:00[0;39m [32m INFO[0;39m [35m6056[0;39m [2m---[0;39m [2m[n(58)-127.0.0.1][0;39m 
+
