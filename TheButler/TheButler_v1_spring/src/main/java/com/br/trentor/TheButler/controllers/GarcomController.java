@@ -12,54 +12,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.br.trentor.TheButler.model.dtos.UsuarioDTO;
+import com.br.trentor.TheButler.model.dtos.GarcomDTO;
+import com.br.trentor.TheButler.services.impl.GarcomServicesImpl;
 import com.br.trentor.TheButler.services.impl.UsuarioServicesImpl;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
-@RequestMapping(path = "/users/v1/")
-@Tag(name = "Usuarios")
+@RequestMapping(path = "/garcom/v1/")
+@Tag(name = "Garçom")
 public class GarcomController {
 
 	@Autowired
-	private UsuarioServicesImpl userServices;
+	private GarcomServicesImpl garcomServices;
 	
-	public ResponseEntity<UsuarioDTO> obterUsuarioPorId(@PathVariable Long id) throws Exception {
-		UsuarioDTO user = userServices.buscarUsuarioPorId(id);
-		return new ResponseEntity<>(user, HttpStatus.OK);
-	}
 	
-	@Operation(tags = "Usuarios", summary = "Cria um novo usuario no banco", description = "Faz a criação de um tipo qualquer dentro do banco")
-	@PostMapping(path = "registrar-usuario")
-	public ResponseEntity<UsuarioDTO> criarUsuario(@RequestBody UsuarioDTO novoUsuario) throws Exception {
-		UsuarioDTO usuarioCadastrado = userServices.criarNovoUsuario(novoUsuario);
+	@Operation(tags = "Garçom", summary = "Cria um novo garçom no banco", description = "Faz a criação de um tipo garçom dentro do banco")
+	@PostMapping(path = "registrar-garcom")
+	public ResponseEntity<GarcomDTO> criarUsuario(@RequestBody GarcomDTO novoUsuario) throws Exception {
+		GarcomDTO usuarioCadastrado = garcomServices.registrarNovoGarcom(novoUsuario);
 		return new ResponseEntity<>(usuarioCadastrado, HttpStatus.CREATED);
 	}
-	
-	@Operation(tags = "Usuarios", summary = "Atualiza um usuario existente no banco", description = "Faz a atualização de um tipo qualquer dentro do banco")
-	@PutMapping(path = "atualizar-usuario")
-	public ResponseEntity<UsuarioDTO> atualizarUsuarioExistente(@RequestBody UsuarioDTO usuarioExistente) throws Exception {
-		var user = userServices.atualizarDadosUsuarioExistente(usuarioExistente);
-		return new ResponseEntity<>(user, HttpStatus.OK);
-		
-	}
-	
-	
-	@Operation(tags = "Usuarios", summary = "Deleta um usuario no banco", description = "Faz a deleção de um tipo qualquer dentro do banco")
-	@DeleteMapping(path = "deletar-usuario/{id}")
-	public ResponseEntity<?> deletarUsuarioPeloId(@PathVariable Long id) throws Exception {
-		userServices.deletarUsuarioPorId(id);
-		return ResponseEntity.noContent().build();
-	}
-	
-	
-	public ResponseEntity<?> definirTipoDeUsuario(@RequestParam(value = "userName") String userName) throws Exception {
-			var difined = userServices.definirTipoDeUsuario(userName);
-			return null;
-	}
-	
 	
 	//IMPLEMENTAR RESTANTE DO CRUD
 	
