@@ -20,7 +20,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
-@RequestMapping(path = "/users/v1/")
+@RequestMapping(path = "/usuario/v1/")
 @Tag(name = "Usuarios")
 public class UsuarioController {
 
