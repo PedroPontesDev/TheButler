@@ -9,6 +9,8 @@ import com.br.trentor.TheButler.model.mapper.MyMapper;
 import com.br.trentor.TheButler.repositories.UsuarioRepositories;
 import com.br.trentor.TheButler.services.UsuarioServices;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class UsuarioServicesImpl implements UsuarioServices {
 
@@ -16,6 +18,7 @@ public class UsuarioServicesImpl implements UsuarioServices {
 	private UsuarioRepositories userRepository;
 
 	@Override
+	@Transactional
 	public UsuarioDTO criarNovoUsuario(UsuarioDTO novoUsuario) throws Exception {
 		if (novoUsuario == null)
 			throw new Exception("Dados inválidos, tente novamente!");
@@ -26,6 +29,7 @@ public class UsuarioServicesImpl implements UsuarioServices {
 	}
 
 	@Override
+	@Transactional
 	public UsuarioDTO buscarUsuarioPorId(Long id) throws Exception {
 		var usuarioNoBanco = userRepository.findById(id);
 		if (!usuarioNoBanco.isPresent())
@@ -36,6 +40,7 @@ public class UsuarioServicesImpl implements UsuarioServices {
 	}
 
 	@Override
+	@Transactional
 	public UsuarioDTO atualizarDadosUsuarioExistente(UsuarioDTO usuarioExistente) throws Exception {
 		var usuarioNoBanco = userRepository.findById(usuarioExistente.getId());
 		if (!usuarioNoBanco.isPresent())
@@ -51,6 +56,7 @@ public class UsuarioServicesImpl implements UsuarioServices {
 	}
 
 	@Override
+	@Transactional
 	public void deletarUsuarioPorId(Long id) throws Exception {
 		var user = userRepository.findById(id);
 		if (user.isPresent()) {

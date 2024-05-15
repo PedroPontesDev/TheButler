@@ -4,9 +4,9 @@ import com.br.trentor.TheButler.model.dtos.GarcomDTO;
 
 public interface GarcomServices {
 
-	GarcomDTO criarNovoGarcom(GarcomDTO novoUsuario) throws Exception;
-	GarcomDTO buscarUsuarioPorId(Long id) throws Exception;
-	GarcomDTO atualizarDadosUsuarioExistente(GarcomDTO usuarioExistente) throws Exception;
-	void deletarUsuarioPorId(Long id) throws Exception;
+	GarcomDTO registrarNovoGarcom(GarcomDTO novoUsuario) throws Exception;
+	GarcomDTO buscarGarcomPorId(Long id) throws Exception;
+	GarcomDTO atualizarDadosGarcomExistente(GarcomDTO garcomExistente) throws Exception;
+	void deletarGarcomPorId(Long id) throws Exception;
 	
 }
