@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -26,6 +27,7 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioServicesImpl userServices;
 	
+	@GetMapping(path = "procurar-por-id/{id}")
 	public ResponseEntity<UsuarioDTO> obterUsuarioPorId(@PathVariable Long id) throws Exception {
 		UsuarioDTO user = userServices.buscarUsuarioPorId(id);
 		return new ResponseEntity<>(user, HttpStatus.OK);
