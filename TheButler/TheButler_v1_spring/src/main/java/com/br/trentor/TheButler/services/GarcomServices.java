@@ -1,5 +1,7 @@
 package com.br.trentor.TheButler.services;
 
+import java.time.LocalDate;
+
 import com.br.trentor.TheButler.model.dtos.GarcomDTO;
 
 public interface GarcomServices {

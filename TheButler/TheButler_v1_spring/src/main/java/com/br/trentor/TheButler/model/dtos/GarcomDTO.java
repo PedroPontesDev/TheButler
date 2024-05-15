@@ -24,13 +24,19 @@ public class GarcomDTO extends UsuarioDTO {
 
 	private BigDecimal cpf;
 
-	private LocalDateTime totalHorasTrabalhadasMes;
-
 	private List<Gorjeta> gorjeta = new ArrayList<>();
 
 	private Comanda comanda;
 
 	private Double salario;
+
+	public GarcomDTO(Long id, String userName, String password, String fullName, BigDecimal cpf, List<Gorjeta> gorjeta,
+			Comanda comanda, Double salario) {
+		super(id, userName, password, fullName, cpf);
+		this.gorjeta = gorjeta;
+		this.comanda = comanda;
+		this.salario = salario;
+	}
 
 	@Override
 	public Long getId() {
@@ -90,14 +96,6 @@ public class GarcomDTO extends UsuarioDTO {
 	public void setCpf(BigDecimal cpf) {
 		// TODO Auto-generated method stub
 		super.setCpf(cpf);
-	}
-
-	public LocalDateTime getTotalHorasTrabalhadasMes() {
-		return totalHorasTrabalhadasMes;
-	}
-
-	public void setTotalHorasTrabalhadasMes(LocalDateTime totalHorasTrabalhadasMes) {
-		this.totalHorasTrabalhadasMes = totalHorasTrabalhadasMes;
 	}
 
 	public List<Gorjeta> getGorjeta() {

@@ -1,5 +1,6 @@
 package com.br.trentor.TheButler.services.impl;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,7 +63,6 @@ public class GarcomServicesImpl implements GarcomServices {
 		garcom.setFullName(garcomExistente.getFullName());
 		garcom.setCpf(garcomExistente.getCpf());
 		garcom.setComanda(garcomExistente.getComanda());
-		garcom.setTotalHorasTrabalhadasMes(garcomExistente.getTotalHorasTrabalhadasMes());
 		garcom.setSalario(garcomExistente.getSalario());
 		garcom.setGorjetas(new ArrayList<>());
 		garcomRepository.save(garcom);
@@ -77,5 +77,7 @@ public class GarcomServicesImpl implements GarcomServices {
 		if (finder.isPresent()) garcomRepository.deleteById(id);
 		throw new Exception("Garcom não encontrado, verifique o identificador único e tente novamente!");
 	}
+
+	
 
 }

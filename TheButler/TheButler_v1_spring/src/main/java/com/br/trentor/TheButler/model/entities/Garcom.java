@@ -24,10 +24,7 @@ import jakarta.persistence.Table;
 @PrimaryKeyJoinColumn(name = "id")
 public class Garcom extends Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Column(name = "horas_trabalhadas_mes")
-	private LocalDateTime totalHorasTrabalhadasMes;
-
+	
 	@JsonIgnore
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "tb_gorjeta_de_garcons", joinColumns = @JoinColumn(name = "garcom_id"), inverseJoinColumns = @JoinColumn(name = "gorjeta_id"))
