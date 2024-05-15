@@ -39,18 +39,15 @@ public class Comanda implements Serializable {
 	@OneToOne
 	private Garcom garcom;
 
-	@OneToOne
-	private Mesa mesaDaComanda;
 
 	public Comanda(Long id, String nomeComanda, Set<Item> itemComanda, Boolean estaEmAberta, Long valorConta,
-			Garcom garcom, Mesa mesaDaComanda) {
+			Garcom garcom) {
 		this.id = id;
 		this.nomeComanda = nomeComanda;
 		this.itemComanda = itemComanda;
 		this.estaEmAberta = estaEmAberta;
 		this.valorConta = valorConta;
 		this.garcom = garcom;
-		this.mesaDaComanda = mesaDaComanda;
 	}
 	
 	public Comanda() {
@@ -105,14 +102,6 @@ public class Comanda implements Serializable {
 		this.garcom = garcom;
 	}
 
-	public Mesa getMesaDaComanda() {
-		return mesaDaComanda;
-	}
-
-	public void setMesaDaComanda(Mesa mesaDaComanda) {
-		this.mesaDaComanda = mesaDaComanda;
-	}
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -133,8 +122,9 @@ public class Comanda implements Serializable {
 	@Override
 	public String toString() {
 		return "Comanda [id=" + id + ", nomeComanda=" + nomeComanda + ", itemComanda=" + itemComanda + ", estaEmAberta="
-				+ estaEmAberta + ", valorConta=" + valorConta + ", garcom=" + garcom + ", mesaDaComanda="
-				+ mesaDaComanda + "]";
+				+ estaEmAberta + ", valorConta=" + valorConta + ", garcom=" + garcom + "]";
 	}
+
+	
 
 }

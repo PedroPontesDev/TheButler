@@ -26,9 +26,6 @@ public class Mesa implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@OneToOne(mappedBy = "mesaDaComanda")
-	private Comanda comandaDaMesa;
-	
 	@Enumerated(EnumType.STRING)
 	private StatusDeMesa statusDeMesa;
 	
@@ -42,7 +39,6 @@ public class Mesa implements Serializable {
 	public Mesa(Long id, Comanda comandaDaMesa, StatusDeMesa statusDeMesa, Integer[] numeroOcupantes,
 			LocalDateTime inicioOcupacao, LocalDateTime terminoOcupacao) {
 		this.id = id;
-		this.comandaDaMesa = comandaDaMesa;
 		this.statusDeMesa = statusDeMesa;
 		this.numeroOcupantes = numeroOcupantes;
 		this.inicioOcupacao = inicioOcupacao;
@@ -59,14 +55,6 @@ public class Mesa implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Comanda getComandaDaMesa() {
-		return comandaDaMesa;
-	}
-
-	public void setComandaDaMesa(Comanda comandaDaMesa) {
-		this.comandaDaMesa = comandaDaMesa;
 	}
 
 	public StatusDeMesa getStatusDeMesa() {
@@ -120,11 +108,11 @@ public class Mesa implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Mesa [id=" + id + ", comandaDaMesa=" + comandaDaMesa + ", statusDeMesa=" + statusDeMesa
-				+ ", numeroOcupantes=" + Arrays.toString(numeroOcupantes) + ", inicioOcupacao=" + inicioOcupacao
-				+ ", terminoOcupacao=" + terminoOcupacao + "]";
+		return "Mesa [id=" + id + ", statusDeMesa=" + statusDeMesa + ", numeroOcupantes="
+				+ Arrays.toString(numeroOcupantes) + ", inicioOcupacao=" + inicioOcupacao + ", terminoOcupacao="
+				+ terminoOcupacao + "]";
 	}
-	
+
 	
 	
 }

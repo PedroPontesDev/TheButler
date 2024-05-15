@@ -1,6 +1,10 @@
 package com.br.trentor.TheButler.services.impl;
 
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.time.temporal.TemporalUnit;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +37,7 @@ public class GarcomServicesImpl implements GarcomServices {
 		Garcom garcom = MyMapper.parseObject(novoGarcom, Garcom.class);
 		garcom.setUserName(novoUsuario.getUserName());
 		garcom.setPassword(novoUsuario.getPassword());
+		garcom.SET
 		garcom.setFullName(novoUsuario.getFullName());
 		garcom.setCpf(novoUsuario.getCpf());
 		garcom.setSalario(novoUsuario.getSalario());
@@ -74,10 +79,12 @@ public class GarcomServicesImpl implements GarcomServices {
 	@Override
 	public void deletarGarcomPorId(Long id) throws Exception {
 		var finder = garcomRepository.findById(id);
-		if (finder.isPresent()) garcomRepository.deleteById(id);
+		if (finder.isPresent())
+			garcomRepository.deleteById(id);
 		throw new Exception("Garcom não encontrado, verifique o identificador único e tente novamente!");
 	}
 
 	
 
+	
 }

@@ -7,13 +7,15 @@ import java.util.TreeSet;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "tb_menu")
+@Table(name = "tb_cardapio")
 public class Cardapio implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -24,17 +26,17 @@ public class Cardapio implements Serializable {
 	@Column(name = "nome_de_cardapio")
 	private String nomeDoCardapio;
 
-	@OneToMany(mappedBy = "itemDeCardapio")
+	@OneToMany(mappedBy = "itemNoCardapio", fetch = FetchType.EAGER)
 	private Set<Item> itemsNoCardapio = new TreeSet<>();
 
-	public Cardapio(Long id, String nomeDoCardapio, Set<Item> itemsNoCardapio) {
+	@OneToOne(mappedBy = "cardapio")
+	private Garcom cardapioGarçom;
+
+	public Cardapio(Long id, String nomeDoCardapio, Set<Item> itemsNoCardapio, Garcom cardapioGarçom) {
 		this.id = id;
 		this.nomeDoCardapio = nomeDoCardapio;
 		this.itemsNoCardapio = itemsNoCardapio;
-	}
-
-	public Cardapio() {
-
+		this.cardapioGarçom = cardapioGarçom;
 	}
 
 	public Long getId() {
@@ -59,6 +61,14 @@ public class Cardapio implements Serializable {
 
 	public void setItemsNoCardapio(Set<Item> itemsNoCardapio) {
 		this.itemsNoCardapio = itemsNoCardapio;
+	}
+
+	public Garcom getCardapioGarçom() {
+		return cardapioGarçom;
+	}
+
+	public void setCardapioGarçom(Garcom cardapioGarçom) {
+		this.cardapioGarçom = cardapioGarçom;
 	}
 
 	@Override

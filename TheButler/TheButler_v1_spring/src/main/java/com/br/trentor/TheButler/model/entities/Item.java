@@ -38,21 +38,23 @@ public class Item implements Serializable {
 	private Boolean estaDisponivel;
 
 	@ManyToOne
-	private Cardapio itemDeCardapio;
+	private Cardapio itemNoCardapio;
 
 	@JsonIgnore
 	@ManyToOne
 	private Comanda comandaDoItem;
 
+	
+	
 	public Item(Long id, String imgUrl, String nomeDoItem, Double preço, Integer quantidade, Boolean estaDisponivel,
-			Cardapio itemDeCardapio, Comanda comandaDoItem) {
+			Cardapio itemNoCardapio, Comanda comandaDoItem) {
 		this.id = id;
 		this.imgUrl = imgUrl;
 		this.nomeDoItem = nomeDoItem;
 		this.preço = preço;
 		this.quantidade = quantidade;
 		this.estaDisponivel = estaDisponivel;
-		this.itemDeCardapio = itemDeCardapio;
+		this.itemNoCardapio = itemNoCardapio;
 		this.comandaDoItem = comandaDoItem;
 	}
 
@@ -107,12 +109,22 @@ public class Item implements Serializable {
 		this.estaDisponivel = estaDisponivel;
 	}
 
-	public Cardapio getItemDeCardapio() {
-		return itemDeCardapio;
+	
+	
+	public Cardapio getItemNoCardapio() {
+		return itemNoCardapio;
 	}
 
-	public void setItemDeCardapio(Cardapio itemDeCardapio) {
-		this.itemDeCardapio = itemDeCardapio;
+	public void setItemNoCardapio(Cardapio itemNoCardapio) {
+		this.itemNoCardapio = itemNoCardapio;
+	}
+
+	public Comanda getComandaDoItem() {
+		return comandaDoItem;
+	}
+
+	public void setComandaDoItem(Comanda comandaDoItem) {
+		this.comandaDoItem = comandaDoItem;
 	}
 
 	@Override
