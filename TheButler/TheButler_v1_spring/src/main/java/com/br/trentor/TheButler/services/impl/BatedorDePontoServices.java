@@ -55,9 +55,15 @@ public class BatedorDePontoServices implements BatedorPontoService {
 
 	@Override
 	public void calcularHorasTrabalhadasDeFuncionarioMes(Long funcionarioId, Long batedorPontoId) throws Exception {
-		var funcionario = funcionarioRepository.findById(funcionarioId).orElseThrow(() -> new Exception("Funcionário não encontrado!");
-		BatedorPonto batedor = batedorPontorRepository.findById(batedorPontoId).orElseThrow(() -> new Exception("Batedor de ponto não encontrado!"))
-	
+	    var funcionario = funcionarioRepository.findById(funcionarioId).orElseThrow(() -> new Exception("Funcionário não encontrado!"));
+	    BatedorPonto batedor = batedorPontorRepository.findById(batedorPontoId).orElseThrow(() -> new Exception("Batedor de ponto não encontrado!"));
+	    if(batedor.getUsuario().getId() == funcionario.getId()) {
+	    	Month month =  LocalDateTime.of(batedor.getHorarioDeEntradaDia(), batedor.getHorarioDeSaidaDia()).getMonth();
+	    }
+	    
+	    
+	    
+	    
 	}
 
 }
