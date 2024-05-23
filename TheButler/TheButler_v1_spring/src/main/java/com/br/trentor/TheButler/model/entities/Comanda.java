@@ -36,7 +36,7 @@ public class Comanda implements Serializable {
 	@Column(name = "valor_total_comanda")
 	private Long valorConta;
 
-	@OneToOne
+	@OneToOne(mappedBy = "comanda")
 	private Garcom garcom;
 
 

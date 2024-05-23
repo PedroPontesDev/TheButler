@@ -73,7 +73,7 @@ public class UsuarioServicesImpl implements UsuarioServices {
 		var aDefenir = MyMapper.parseObject(finded.getClass(), null);
 		
 		//Deixar o adm escolher que tipo de user defininr
-		//A implementar
+		//A implementar com spring Security
 		return null;
 	}
 

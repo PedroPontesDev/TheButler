@@ -1,51 +1,29 @@
-package com.br.trentor.TheButler.model.entities;
+package com.br.trentor.TheButler.model.dtos;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-import org.springframework.beans.factory.annotation.Autowired;
+public class BatedorPontoDTO {
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
-
-@Entity
-@Table(name = "tb_batedor_ponto")
-public class BatedorPonto {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	@Autowired
 	private LocalDateTime horarioDeEntradaDia;
-	@Autowired
 	private LocalDateTime horarioDeSaidaDia;
-
-	@OneToOne
-	private Usuario usuario;
-
-	@Autowired
+	private UsuarioDTO usuario;
 	private LocalDate diaFalta;
-
 	private boolean teveFalta;
 
-	public BatedorPonto(Long id, LocalDateTime horarioDeEntradaDia, LocalDateTime horarioDeSaidaDia, Usuario usuario,
-			LocalDate diaFalta, boolean teveFalta) {
+	public BatedorPontoDTO() {
+	}
+
+	public BatedorPontoDTO(Long id, LocalDateTime horarioDeEntradaDia, LocalDateTime horarioDeSaidaDia,
+			UsuarioDTO usuario, LocalDate diaFalta, boolean teveFalta) {
 		this.id = id;
 		this.horarioDeEntradaDia = horarioDeEntradaDia;
 		this.horarioDeSaidaDia = horarioDeSaidaDia;
 		this.usuario = usuario;
 		this.diaFalta = diaFalta;
 		this.teveFalta = teveFalta;
-	}
-
-	public BatedorPonto() {
-
 	}
 
 	public Long getId() {
@@ -72,11 +50,11 @@ public class BatedorPonto {
 		this.horarioDeSaidaDia = horarioDeSaidaDia;
 	}
 
-	public Usuario getUsuario() {
+	public UsuarioDTO getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuarioId(Usuario usuario) {
+	public void setUsuario(UsuarioDTO usuario) {
 		this.usuario = usuario;
 	}
 
@@ -109,13 +87,13 @@ public class BatedorPonto {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		BatedorPonto other = (BatedorPonto) obj;
+		BatedorPontoDTO other = (BatedorPontoDTO) obj;
 		return Objects.equals(id, other.id);
 	}
 
 	@Override
 	public String toString() {
-		return "BatedorPonto [id=" + id + ", horarioDeEntradaDia=" + horarioDeEntradaDia + ", horarioDeSaidaDia="
+		return "BatedorPontoDTO [id=" + id + ", horarioDeEntradaDia=" + horarioDeEntradaDia + ", horarioDeSaidaDia="
 				+ horarioDeSaidaDia + ", usuario=" + usuario + ", diaFalta=" + diaFalta + ", teveFalta=" + teveFalta
 				+ "]";
 	}

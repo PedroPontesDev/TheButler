@@ -1,10 +1,5 @@
 package com.br.trentor.TheButler.services.impl;
 
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.Month;
-import java.time.temporal.TemporalUnit;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +9,6 @@ import com.br.trentor.TheButler.model.dtos.GarcomDTO;
 import com.br.trentor.TheButler.model.entities.Garcom;
 import com.br.trentor.TheButler.model.mapper.MyMapper;
 import com.br.trentor.TheButler.repositories.GarcomRepositories;
-import com.br.trentor.TheButler.repositories.UsuarioRepositories;
 import com.br.trentor.TheButler.services.GarcomServices;
 
 import jakarta.transaction.Transactional;
@@ -24,10 +18,7 @@ public class GarcomServicesImpl implements GarcomServices {
 
 	@Autowired
 	private GarcomRepositories garcomRepository;
-
-	@Autowired
-	private UsuarioRepositories userRepository;
-
+	
 	@Override
 	@Transactional
 	public GarcomDTO registrarNovoGarcom(GarcomDTO novoUsuario) throws Exception {
@@ -37,7 +28,6 @@ public class GarcomServicesImpl implements GarcomServices {
 		Garcom garcom = MyMapper.parseObject(novoGarcom, Garcom.class);
 		garcom.setUserName(novoUsuario.getUserName());
 		garcom.setPassword(novoUsuario.getPassword());
-		garcom.SET
 		garcom.setFullName(novoUsuario.getFullName());
 		garcom.setCpf(novoUsuario.getCpf());
 		garcom.setSalario(novoUsuario.getSalario());
@@ -83,8 +73,5 @@ public class GarcomServicesImpl implements GarcomServices {
 			garcomRepository.deleteById(id);
 		throw new Exception("Garcom não encontrado, verifique o identificador único e tente novamente!");
 	}
-
-	
-
 	
 }

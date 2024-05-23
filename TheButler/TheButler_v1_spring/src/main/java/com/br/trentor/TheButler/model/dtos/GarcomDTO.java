@@ -10,6 +10,7 @@ import com.br.trentor.TheButler.model.entities.Cardapio;
 import com.br.trentor.TheButler.model.entities.Comanda;
 import com.br.trentor.TheButler.model.entities.Gorjeta;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 public class GarcomDTO extends UsuarioDTO {
 	private static final long serialVersionUID = 1L;
@@ -30,46 +31,35 @@ public class GarcomDTO extends UsuarioDTO {
 	private Comanda comanda;
 
 	private Double salario;
-	
+
 	private LocalDateTime horarioDiaEntrada;
 
 	private LocalDateTime horarioDiaSaida;
-	
-	private Cardapio cardapio;
-	
-	
-	
 
-	public GarcomDTO(Long id, String userName, String password, String fullName, BigDecimal cpf, List<Gorjeta> gorjeta, Comanda comanda, Double salario,
-			LocalDateTime horarioDiaEntrada, LocalDateTime horarioDiaSaida, Cardapio cardapio) {
+	public GarcomDTO(Long id, String userName, String password, String fullName, BigDecimal cpf, List<Gorjeta> gorjeta,
+			Comanda comanda, Double salario, LocalDateTime horarioDiaEntrada, LocalDateTime horarioDiaSaida) {
 		super(id, userName, password, fullName, cpf);
+		this.userName = userName;
+		this.password = password;
+		this.fullName = fullName;
+		this.cpf = cpf;
 		this.gorjeta = gorjeta;
 		this.comanda = comanda;
 		this.salario = salario;
 		this.horarioDiaEntrada = horarioDiaEntrada;
 		this.horarioDiaSaida = horarioDiaSaida;
-		this.cardapio = cardapio;
 	}
 
 	public GarcomDTO() {
-		
+
 	}
-	
+
 	public LocalDateTime getHorarioDiaEntrada() {
 		return horarioDiaEntrada;
 	}
 
 	public void setHorarioDiaEntrada(LocalDateTime horarioDiaEntrada) {
 		this.horarioDiaEntrada = horarioDiaEntrada;
-	}
-	
-
-	public Cardapio getCardapio() {
-		return cardapio;
-	}
-
-	public void setCardapio(Cardapio cardapio) {
-		this.cardapio = cardapio;
 	}
 
 	public LocalDateTime getHorarioDiaSaida() {
@@ -164,8 +154,6 @@ public class GarcomDTO extends UsuarioDTO {
 		this.salario = salario;
 	}
 
-	
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -195,5 +183,4 @@ public class GarcomDTO extends UsuarioDTO {
 				+ ", gorjeta=" + gorjeta + ", comanda=" + comanda + ", salario=" + salario + "]";
 	}
 
-	
 }

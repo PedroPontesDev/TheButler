@@ -29,14 +29,14 @@ public class Cardapio implements Serializable {
 	@OneToMany(mappedBy = "itemNoCardapio", fetch = FetchType.EAGER)
 	private Set<Item> itemsNoCardapio = new TreeSet<>();
 
-	@OneToOne(mappedBy = "cardapio")
-	private Garcom cardapioGarçom;
-
-	public Cardapio(Long id, String nomeDoCardapio, Set<Item> itemsNoCardapio, Garcom cardapioGarçom) {
+	public Cardapio(Long id, String nomeDoCardapio, Set<Item> itemsNoCardapio) {
 		this.id = id;
 		this.nomeDoCardapio = nomeDoCardapio;
 		this.itemsNoCardapio = itemsNoCardapio;
-		this.cardapioGarçom = cardapioGarçom;
+	}
+
+	public Cardapio() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public Long getId() {
@@ -61,14 +61,6 @@ public class Cardapio implements Serializable {
 
 	public void setItemsNoCardapio(Set<Item> itemsNoCardapio) {
 		this.itemsNoCardapio = itemsNoCardapio;
-	}
-
-	public Garcom getCardapioGarçom() {
-		return cardapioGarçom;
-	}
-
-	public void setCardapioGarçom(Garcom cardapioGarçom) {
-		this.cardapioGarçom = cardapioGarçom;
 	}
 
 	@Override
